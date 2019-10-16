@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {MasterCeremony} from '../model/MasterCeremony';
+import {McService} from '../service/mc.service';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 
 @Component({
   selector: 'app-mc-service-detail',
@@ -7,9 +10,41 @@ import { Component, OnInit } from '@angular/core';
 })
 export class McServiceDetailComponent implements OnInit {
 
-  constructor() { }
+
+  mcname;
+  masterc:MasterCeremony;
+
+  constructor(private mcserive:McService,private route:ActivatedRoute,private router:Router) {
+
+  }
 
   ngOnInit() {
+    this.route.paramMap.subscribe((param:ParamMap)=>{
+      this.mcname=param.get('name');
+    })
+
+    this.mcserive.findMcByName(this.mcname).subscribe(data=>{
+      this.masterc=data;
+    })
+
+
   }
+
+
+
+  editmc(name){
+    this.router.navigate(['mc-edit',name]);
+  }
+
+  delete(name){
+    this.mcserive.deletemc(name);
+
+  }
+
+
+
+
+
+
 
 }

@@ -33,7 +33,8 @@ import {McServiceCreateComponent} from '../../pages/mc-service/mc-service-create
     FormsModule,
     HttpClientModule,
     NgbModule,
-    ClipboardModule
+    ClipboardModule,
+    ReactiveFormsModule
   ],
   declarations: [
     DashboardComponent,
